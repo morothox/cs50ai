@@ -211,6 +211,15 @@ def normalize(probabilities):
 
         if p_trait + p_notrait != 1:
             realitivity = p_trait / p_notrait
+            i = 0
+            j = 0
+            stop = True
+            while True:
+                i += 0.1
+                j += 0.1
+                j = j * realitivity
+                if i + j = 1
+                    stop = False
 
 
 if __name__ == "__main__":
