@@ -172,6 +172,11 @@ class CrosswordCreator():
         Return True if `assignment` is complete (i.e., assigns a value to each
         crossword variable); return False otherwise.
         """
+        assignments = []
+        for a in assignment:
+            assignments.append(a)
+            
+        self.ac3(assignments)
         raise NotImplementedError
 
     def consistent(self, assignment):
