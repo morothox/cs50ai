@@ -98,7 +98,12 @@ def train_model(evidence, labels):
     Given a list of evidence lists and a list of labels, return a
     fitted k-nearest neighbor model (k=1) trained on the data.
     """
-    raise NotImplementedError
+
+    # 2. Initialize and train the model (with k=3)
+    knn = KNeighborsClassifier(n_neighbors=1)
+    knn.fit(evidence, labels)
+
+    return knn
 
 
 def evaluate(labels, predictions):
@@ -116,7 +121,24 @@ def evaluate(labels, predictions):
     representing the "true negative rate": the proportion of
     actual negative labels that were accurately identified.
     """
-    raise NotImplementedError
+    pos = 0
+    neg = 0
+    count_pos = 0
+    count_neg = 0
+    for i in range(len(predictions)):
+        if labels[i] == 1:
+            count_pos += 1
+            if predictions[i] == labels[i]:
+                pos += 1
+        elif labels[i] == 0:
+            count_neg += 1
+            if predictions[i] == labels[i]:
+                neg += 1
+
+    sensitivity = pos / count_pos
+    specificity = neg / count_neg
+    res = (sensitivity, specificity)
+    return res
 
 
 if __name__ == "__main__":
