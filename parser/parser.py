@@ -13,21 +13,15 @@ P -> "at" | "before" | "in" | "of" | "on" | "to"
 V -> "arrived" | "came" | "chuckled" | "had" | "lit" | "said" | "sat"
 V -> "smiled" | "tell" | "were"
 """
-
 NONTERMINALS = """
-S -> N V
-NP -> N | Det N 
-AN -> Adj N 
-PAn -> P Adj N
-S -> N V NP 
-S -> N V NP P N 
-S -> N V PAN D N V 
-S -> N V Det AN
-S -> N V P N 
-S -> N Adv V Det N Conj N V P NP Adv 
-S -> N V Adv Det V Det N 
+S -> NP VP | VP | S Conjunction S | S P S
 
+NP -> N | Det N | AP NP | NP PP | Det AP N | N NP
+VP -> V | V NP | V PP | VP PP | V NP PP | Adv VP | VP Adv
+PP -> P NP
+AP -> Adj | Adj AP
 """
+
 
 grammar = nltk.CFG.fromstring(NONTERMINALS + TERMINALS)
 parser = nltk.ChartParser(grammar)
